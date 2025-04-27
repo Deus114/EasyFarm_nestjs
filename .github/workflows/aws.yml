@@ -31,9 +31,10 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/easy-farm:latest
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
             docker stop easy-farm || true
             docker rm easy-farm || true
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/easy-farm:latest
             docker run -d --name easy-farm \
               -p 8000:8000 \
               -e PORT=${{ secrets.PORT }} \
