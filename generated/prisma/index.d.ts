@@ -23,6 +23,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type Post = $Result.DefaultSelection<Prisma.$PostPayload>
+/**
+ * Model Sensor
+ * 
+ */
+export type Sensor = $Result.DefaultSelection<Prisma.$SensorPayload>
 
 /**
  * Enums
@@ -35,11 +40,36 @@ export namespace $Enums {
 
 export type Role = (typeof Role)[keyof typeof Role]
 
+
+export const SensorType: {
+  TEMPERATURE: 'TEMPERATURE',
+  HUMIDITY: 'HUMIDITY',
+  TEMPERATURE_HUMIDITY: 'TEMPERATURE_HUMIDITY'
+};
+
+export type SensorType = (typeof SensorType)[keyof typeof SensorType]
+
+
+export const SensorStatus: {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+};
+
+export type SensorStatus = (typeof SensorStatus)[keyof typeof SensorStatus]
+
 }
 
 export type Role = $Enums.Role
 
 export const Role: typeof $Enums.Role
+
+export type SensorType = $Enums.SensorType
+
+export const SensorType: typeof $Enums.SensorType
+
+export type SensorStatus = $Enums.SensorStatus
+
+export const SensorStatus: typeof $Enums.SensorStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -185,6 +215,16 @@ export class PrismaClient<
     * ```
     */
   get post(): Prisma.PostDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sensor`: Exposes CRUD operations for the **Sensor** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Sensors
+    * const sensors = await prisma.sensor.findMany()
+    * ```
+    */
+  get sensor(): Prisma.SensorDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -626,7 +666,8 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    Post: 'Post'
+    Post: 'Post',
+    Sensor: 'Sensor'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -645,7 +686,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "post"
+      modelProps: "user" | "post" | "sensor"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -797,6 +838,80 @@ export namespace Prisma {
           }
         }
       }
+      Sensor: {
+        payload: Prisma.$SensorPayload<ExtArgs>
+        fields: Prisma.SensorFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SensorFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SensorPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SensorFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SensorPayload>
+          }
+          findFirst: {
+            args: Prisma.SensorFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SensorPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SensorFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SensorPayload>
+          }
+          findMany: {
+            args: Prisma.SensorFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SensorPayload>[]
+          }
+          create: {
+            args: Prisma.SensorCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SensorPayload>
+          }
+          createMany: {
+            args: Prisma.SensorCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SensorCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SensorPayload>[]
+          }
+          delete: {
+            args: Prisma.SensorDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SensorPayload>
+          }
+          update: {
+            args: Prisma.SensorUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SensorPayload>
+          }
+          deleteMany: {
+            args: Prisma.SensorDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SensorUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SensorUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SensorPayload>[]
+          }
+          upsert: {
+            args: Prisma.SensorUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SensorPayload>
+          }
+          aggregate: {
+            args: Prisma.SensorAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSensor>
+          }
+          groupBy: {
+            args: Prisma.SensorGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SensorGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SensorCountArgs<ExtArgs>
+            result: $Utils.Optional<SensorCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -883,6 +998,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     post?: PostOmit
+    sensor?: SensorOmit
   }
 
   /* Types for Logging */
@@ -978,10 +1094,12 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     posts: number
+    sensors: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | UserCountOutputTypeCountPostsArgs
+    sensors?: boolean | UserCountOutputTypeCountSensorsArgs
   }
 
   // Custom InputTypes
@@ -1000,6 +1118,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PostWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSensorsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SensorWhereInput
   }
 
 
@@ -1222,6 +1347,7 @@ export namespace Prisma {
     role?: boolean
     createdAt?: boolean
     posts?: boolean | User$postsArgs<ExtArgs>
+    sensors?: boolean | User$sensorsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1258,6 +1384,7 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "refreshToken" | "role" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | User$postsArgs<ExtArgs>
+    sensors?: boolean | User$sensorsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1267,6 +1394,7 @@ export namespace Prisma {
     name: "User"
     objects: {
       posts: Prisma.$PostPayload<ExtArgs>[]
+      sensors: Prisma.$SensorPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -1671,6 +1799,7 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sensors<T extends User$sensorsArgs<ExtArgs> = {}>(args?: Subset<T, User$sensorsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2116,6 +2245,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+  }
+
+  /**
+   * User.sensors
+   */
+  export type User$sensorsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sensor
+     */
+    select?: SensorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sensor
+     */
+    omit?: SensorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SensorInclude<ExtArgs> | null
+    where?: SensorWhereInput
+    orderBy?: SensorOrderByWithRelationInput | SensorOrderByWithRelationInput[]
+    cursor?: SensorWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SensorScalarFieldEnum | SensorScalarFieldEnum[]
   }
 
   /**
@@ -3234,6 +3387,1167 @@ export namespace Prisma {
 
 
   /**
+   * Model Sensor
+   */
+
+  export type AggregateSensor = {
+    _count: SensorCountAggregateOutputType | null
+    _avg: SensorAvgAggregateOutputType | null
+    _sum: SensorSumAggregateOutputType | null
+    _min: SensorMinAggregateOutputType | null
+    _max: SensorMaxAggregateOutputType | null
+  }
+
+  export type SensorAvgAggregateOutputType = {
+    id: number | null
+    userId: number | null
+  }
+
+  export type SensorSumAggregateOutputType = {
+    id: number | null
+    userId: number | null
+  }
+
+  export type SensorMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    serialNumber: string | null
+    type: $Enums.SensorType | null
+    status: $Enums.SensorStatus | null
+    description: string | null
+    img: string | null
+    dateAdded: Date | null
+    userId: number | null
+    createdAt: Date | null
+  }
+
+  export type SensorMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    serialNumber: string | null
+    type: $Enums.SensorType | null
+    status: $Enums.SensorStatus | null
+    description: string | null
+    img: string | null
+    dateAdded: Date | null
+    userId: number | null
+    createdAt: Date | null
+  }
+
+  export type SensorCountAggregateOutputType = {
+    id: number
+    name: number
+    serialNumber: number
+    type: number
+    status: number
+    description: number
+    img: number
+    dateAdded: number
+    userId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type SensorAvgAggregateInputType = {
+    id?: true
+    userId?: true
+  }
+
+  export type SensorSumAggregateInputType = {
+    id?: true
+    userId?: true
+  }
+
+  export type SensorMinAggregateInputType = {
+    id?: true
+    name?: true
+    serialNumber?: true
+    type?: true
+    status?: true
+    description?: true
+    img?: true
+    dateAdded?: true
+    userId?: true
+    createdAt?: true
+  }
+
+  export type SensorMaxAggregateInputType = {
+    id?: true
+    name?: true
+    serialNumber?: true
+    type?: true
+    status?: true
+    description?: true
+    img?: true
+    dateAdded?: true
+    userId?: true
+    createdAt?: true
+  }
+
+  export type SensorCountAggregateInputType = {
+    id?: true
+    name?: true
+    serialNumber?: true
+    type?: true
+    status?: true
+    description?: true
+    img?: true
+    dateAdded?: true
+    userId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type SensorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Sensor to aggregate.
+     */
+    where?: SensorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sensors to fetch.
+     */
+    orderBy?: SensorOrderByWithRelationInput | SensorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SensorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sensors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sensors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Sensors
+    **/
+    _count?: true | SensorCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SensorAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SensorSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SensorMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SensorMaxAggregateInputType
+  }
+
+  export type GetSensorAggregateType<T extends SensorAggregateArgs> = {
+        [P in keyof T & keyof AggregateSensor]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSensor[P]>
+      : GetScalarType<T[P], AggregateSensor[P]>
+  }
+
+
+
+
+  export type SensorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SensorWhereInput
+    orderBy?: SensorOrderByWithAggregationInput | SensorOrderByWithAggregationInput[]
+    by: SensorScalarFieldEnum[] | SensorScalarFieldEnum
+    having?: SensorScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SensorCountAggregateInputType | true
+    _avg?: SensorAvgAggregateInputType
+    _sum?: SensorSumAggregateInputType
+    _min?: SensorMinAggregateInputType
+    _max?: SensorMaxAggregateInputType
+  }
+
+  export type SensorGroupByOutputType = {
+    id: number
+    name: string
+    serialNumber: string
+    type: $Enums.SensorType
+    status: $Enums.SensorStatus
+    description: string
+    img: string
+    dateAdded: Date
+    userId: number
+    createdAt: Date
+    _count: SensorCountAggregateOutputType | null
+    _avg: SensorAvgAggregateOutputType | null
+    _sum: SensorSumAggregateOutputType | null
+    _min: SensorMinAggregateOutputType | null
+    _max: SensorMaxAggregateOutputType | null
+  }
+
+  type GetSensorGroupByPayload<T extends SensorGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SensorGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SensorGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SensorGroupByOutputType[P]>
+            : GetScalarType<T[P], SensorGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SensorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    serialNumber?: boolean
+    type?: boolean
+    status?: boolean
+    description?: boolean
+    img?: boolean
+    dateAdded?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sensor"]>
+
+  export type SensorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    serialNumber?: boolean
+    type?: boolean
+    status?: boolean
+    description?: boolean
+    img?: boolean
+    dateAdded?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sensor"]>
+
+  export type SensorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    serialNumber?: boolean
+    type?: boolean
+    status?: boolean
+    description?: boolean
+    img?: boolean
+    dateAdded?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sensor"]>
+
+  export type SensorSelectScalar = {
+    id?: boolean
+    name?: boolean
+    serialNumber?: boolean
+    type?: boolean
+    status?: boolean
+    description?: boolean
+    img?: boolean
+    dateAdded?: boolean
+    userId?: boolean
+    createdAt?: boolean
+  }
+
+  export type SensorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "serialNumber" | "type" | "status" | "description" | "img" | "dateAdded" | "userId" | "createdAt", ExtArgs["result"]["sensor"]>
+  export type SensorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type SensorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type SensorIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $SensorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Sensor"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      serialNumber: string
+      type: $Enums.SensorType
+      status: $Enums.SensorStatus
+      description: string
+      img: string
+      dateAdded: Date
+      userId: number
+      createdAt: Date
+    }, ExtArgs["result"]["sensor"]>
+    composites: {}
+  }
+
+  type SensorGetPayload<S extends boolean | null | undefined | SensorDefaultArgs> = $Result.GetResult<Prisma.$SensorPayload, S>
+
+  type SensorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SensorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SensorCountAggregateInputType | true
+    }
+
+  export interface SensorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Sensor'], meta: { name: 'Sensor' } }
+    /**
+     * Find zero or one Sensor that matches the filter.
+     * @param {SensorFindUniqueArgs} args - Arguments to find a Sensor
+     * @example
+     * // Get one Sensor
+     * const sensor = await prisma.sensor.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SensorFindUniqueArgs>(args: SelectSubset<T, SensorFindUniqueArgs<ExtArgs>>): Prisma__SensorClient<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Sensor that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SensorFindUniqueOrThrowArgs} args - Arguments to find a Sensor
+     * @example
+     * // Get one Sensor
+     * const sensor = await prisma.sensor.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SensorFindUniqueOrThrowArgs>(args: SelectSubset<T, SensorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SensorClient<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Sensor that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SensorFindFirstArgs} args - Arguments to find a Sensor
+     * @example
+     * // Get one Sensor
+     * const sensor = await prisma.sensor.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SensorFindFirstArgs>(args?: SelectSubset<T, SensorFindFirstArgs<ExtArgs>>): Prisma__SensorClient<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Sensor that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SensorFindFirstOrThrowArgs} args - Arguments to find a Sensor
+     * @example
+     * // Get one Sensor
+     * const sensor = await prisma.sensor.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SensorFindFirstOrThrowArgs>(args?: SelectSubset<T, SensorFindFirstOrThrowArgs<ExtArgs>>): Prisma__SensorClient<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Sensors that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SensorFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Sensors
+     * const sensors = await prisma.sensor.findMany()
+     * 
+     * // Get first 10 Sensors
+     * const sensors = await prisma.sensor.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sensorWithIdOnly = await prisma.sensor.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SensorFindManyArgs>(args?: SelectSubset<T, SensorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Sensor.
+     * @param {SensorCreateArgs} args - Arguments to create a Sensor.
+     * @example
+     * // Create one Sensor
+     * const Sensor = await prisma.sensor.create({
+     *   data: {
+     *     // ... data to create a Sensor
+     *   }
+     * })
+     * 
+     */
+    create<T extends SensorCreateArgs>(args: SelectSubset<T, SensorCreateArgs<ExtArgs>>): Prisma__SensorClient<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Sensors.
+     * @param {SensorCreateManyArgs} args - Arguments to create many Sensors.
+     * @example
+     * // Create many Sensors
+     * const sensor = await prisma.sensor.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SensorCreateManyArgs>(args?: SelectSubset<T, SensorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Sensors and returns the data saved in the database.
+     * @param {SensorCreateManyAndReturnArgs} args - Arguments to create many Sensors.
+     * @example
+     * // Create many Sensors
+     * const sensor = await prisma.sensor.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Sensors and only return the `id`
+     * const sensorWithIdOnly = await prisma.sensor.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SensorCreateManyAndReturnArgs>(args?: SelectSubset<T, SensorCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Sensor.
+     * @param {SensorDeleteArgs} args - Arguments to delete one Sensor.
+     * @example
+     * // Delete one Sensor
+     * const Sensor = await prisma.sensor.delete({
+     *   where: {
+     *     // ... filter to delete one Sensor
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SensorDeleteArgs>(args: SelectSubset<T, SensorDeleteArgs<ExtArgs>>): Prisma__SensorClient<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Sensor.
+     * @param {SensorUpdateArgs} args - Arguments to update one Sensor.
+     * @example
+     * // Update one Sensor
+     * const sensor = await prisma.sensor.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SensorUpdateArgs>(args: SelectSubset<T, SensorUpdateArgs<ExtArgs>>): Prisma__SensorClient<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Sensors.
+     * @param {SensorDeleteManyArgs} args - Arguments to filter Sensors to delete.
+     * @example
+     * // Delete a few Sensors
+     * const { count } = await prisma.sensor.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SensorDeleteManyArgs>(args?: SelectSubset<T, SensorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sensors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SensorUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Sensors
+     * const sensor = await prisma.sensor.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SensorUpdateManyArgs>(args: SelectSubset<T, SensorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sensors and returns the data updated in the database.
+     * @param {SensorUpdateManyAndReturnArgs} args - Arguments to update many Sensors.
+     * @example
+     * // Update many Sensors
+     * const sensor = await prisma.sensor.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Sensors and only return the `id`
+     * const sensorWithIdOnly = await prisma.sensor.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SensorUpdateManyAndReturnArgs>(args: SelectSubset<T, SensorUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Sensor.
+     * @param {SensorUpsertArgs} args - Arguments to update or create a Sensor.
+     * @example
+     * // Update or create a Sensor
+     * const sensor = await prisma.sensor.upsert({
+     *   create: {
+     *     // ... data to create a Sensor
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Sensor we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SensorUpsertArgs>(args: SelectSubset<T, SensorUpsertArgs<ExtArgs>>): Prisma__SensorClient<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Sensors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SensorCountArgs} args - Arguments to filter Sensors to count.
+     * @example
+     * // Count the number of Sensors
+     * const count = await prisma.sensor.count({
+     *   where: {
+     *     // ... the filter for the Sensors we want to count
+     *   }
+     * })
+    **/
+    count<T extends SensorCountArgs>(
+      args?: Subset<T, SensorCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SensorCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Sensor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SensorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SensorAggregateArgs>(args: Subset<T, SensorAggregateArgs>): Prisma.PrismaPromise<GetSensorAggregateType<T>>
+
+    /**
+     * Group by Sensor.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SensorGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SensorGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SensorGroupByArgs['orderBy'] }
+        : { orderBy?: SensorGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SensorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSensorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Sensor model
+   */
+  readonly fields: SensorFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Sensor.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SensorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Sensor model
+   */
+  interface SensorFieldRefs {
+    readonly id: FieldRef<"Sensor", 'Int'>
+    readonly name: FieldRef<"Sensor", 'String'>
+    readonly serialNumber: FieldRef<"Sensor", 'String'>
+    readonly type: FieldRef<"Sensor", 'SensorType'>
+    readonly status: FieldRef<"Sensor", 'SensorStatus'>
+    readonly description: FieldRef<"Sensor", 'String'>
+    readonly img: FieldRef<"Sensor", 'String'>
+    readonly dateAdded: FieldRef<"Sensor", 'DateTime'>
+    readonly userId: FieldRef<"Sensor", 'Int'>
+    readonly createdAt: FieldRef<"Sensor", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Sensor findUnique
+   */
+  export type SensorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sensor
+     */
+    select?: SensorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sensor
+     */
+    omit?: SensorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SensorInclude<ExtArgs> | null
+    /**
+     * Filter, which Sensor to fetch.
+     */
+    where: SensorWhereUniqueInput
+  }
+
+  /**
+   * Sensor findUniqueOrThrow
+   */
+  export type SensorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sensor
+     */
+    select?: SensorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sensor
+     */
+    omit?: SensorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SensorInclude<ExtArgs> | null
+    /**
+     * Filter, which Sensor to fetch.
+     */
+    where: SensorWhereUniqueInput
+  }
+
+  /**
+   * Sensor findFirst
+   */
+  export type SensorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sensor
+     */
+    select?: SensorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sensor
+     */
+    omit?: SensorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SensorInclude<ExtArgs> | null
+    /**
+     * Filter, which Sensor to fetch.
+     */
+    where?: SensorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sensors to fetch.
+     */
+    orderBy?: SensorOrderByWithRelationInput | SensorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Sensors.
+     */
+    cursor?: SensorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sensors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sensors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Sensors.
+     */
+    distinct?: SensorScalarFieldEnum | SensorScalarFieldEnum[]
+  }
+
+  /**
+   * Sensor findFirstOrThrow
+   */
+  export type SensorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sensor
+     */
+    select?: SensorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sensor
+     */
+    omit?: SensorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SensorInclude<ExtArgs> | null
+    /**
+     * Filter, which Sensor to fetch.
+     */
+    where?: SensorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sensors to fetch.
+     */
+    orderBy?: SensorOrderByWithRelationInput | SensorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Sensors.
+     */
+    cursor?: SensorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sensors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sensors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Sensors.
+     */
+    distinct?: SensorScalarFieldEnum | SensorScalarFieldEnum[]
+  }
+
+  /**
+   * Sensor findMany
+   */
+  export type SensorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sensor
+     */
+    select?: SensorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sensor
+     */
+    omit?: SensorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SensorInclude<ExtArgs> | null
+    /**
+     * Filter, which Sensors to fetch.
+     */
+    where?: SensorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sensors to fetch.
+     */
+    orderBy?: SensorOrderByWithRelationInput | SensorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Sensors.
+     */
+    cursor?: SensorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sensors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sensors.
+     */
+    skip?: number
+    distinct?: SensorScalarFieldEnum | SensorScalarFieldEnum[]
+  }
+
+  /**
+   * Sensor create
+   */
+  export type SensorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sensor
+     */
+    select?: SensorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sensor
+     */
+    omit?: SensorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SensorInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Sensor.
+     */
+    data: XOR<SensorCreateInput, SensorUncheckedCreateInput>
+  }
+
+  /**
+   * Sensor createMany
+   */
+  export type SensorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Sensors.
+     */
+    data: SensorCreateManyInput | SensorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Sensor createManyAndReturn
+   */
+  export type SensorCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sensor
+     */
+    select?: SensorSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sensor
+     */
+    omit?: SensorOmit<ExtArgs> | null
+    /**
+     * The data used to create many Sensors.
+     */
+    data: SensorCreateManyInput | SensorCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SensorIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Sensor update
+   */
+  export type SensorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sensor
+     */
+    select?: SensorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sensor
+     */
+    omit?: SensorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SensorInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Sensor.
+     */
+    data: XOR<SensorUpdateInput, SensorUncheckedUpdateInput>
+    /**
+     * Choose, which Sensor to update.
+     */
+    where: SensorWhereUniqueInput
+  }
+
+  /**
+   * Sensor updateMany
+   */
+  export type SensorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Sensors.
+     */
+    data: XOR<SensorUpdateManyMutationInput, SensorUncheckedUpdateManyInput>
+    /**
+     * Filter which Sensors to update
+     */
+    where?: SensorWhereInput
+    /**
+     * Limit how many Sensors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Sensor updateManyAndReturn
+   */
+  export type SensorUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sensor
+     */
+    select?: SensorSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sensor
+     */
+    omit?: SensorOmit<ExtArgs> | null
+    /**
+     * The data used to update Sensors.
+     */
+    data: XOR<SensorUpdateManyMutationInput, SensorUncheckedUpdateManyInput>
+    /**
+     * Filter which Sensors to update
+     */
+    where?: SensorWhereInput
+    /**
+     * Limit how many Sensors to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SensorIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Sensor upsert
+   */
+  export type SensorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sensor
+     */
+    select?: SensorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sensor
+     */
+    omit?: SensorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SensorInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Sensor to update in case it exists.
+     */
+    where: SensorWhereUniqueInput
+    /**
+     * In case the Sensor found by the `where` argument doesn't exist, create a new Sensor with this data.
+     */
+    create: XOR<SensorCreateInput, SensorUncheckedCreateInput>
+    /**
+     * In case the Sensor was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SensorUpdateInput, SensorUncheckedUpdateInput>
+  }
+
+  /**
+   * Sensor delete
+   */
+  export type SensorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sensor
+     */
+    select?: SensorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sensor
+     */
+    omit?: SensorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SensorInclude<ExtArgs> | null
+    /**
+     * Filter which Sensor to delete.
+     */
+    where: SensorWhereUniqueInput
+  }
+
+  /**
+   * Sensor deleteMany
+   */
+  export type SensorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Sensors to delete
+     */
+    where?: SensorWhereInput
+    /**
+     * Limit how many Sensors to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Sensor without action
+   */
+  export type SensorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sensor
+     */
+    select?: SensorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sensor
+     */
+    omit?: SensorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SensorInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -3269,6 +4583,22 @@ export namespace Prisma {
   };
 
   export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
+
+
+  export const SensorScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    serialNumber: 'serialNumber',
+    type: 'type',
+    status: 'status',
+    description: 'description',
+    img: 'img',
+    dateAdded: 'dateAdded',
+    userId: 'userId',
+    createdAt: 'createdAt'
+  };
+
+  export type SensorScalarFieldEnum = (typeof SensorScalarFieldEnum)[keyof typeof SensorScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3349,6 +4679,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'SensorType'
+   */
+  export type EnumSensorTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SensorType'>
+    
+
+
+  /**
+   * Reference to a field of type 'SensorType[]'
+   */
+  export type ListEnumSensorTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SensorType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SensorStatus'
+   */
+  export type EnumSensorStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SensorStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'SensorStatus[]'
+   */
+  export type ListEnumSensorStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SensorStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -3377,6 +4735,7 @@ export namespace Prisma {
     role?: EnumRoleFilter<"User"> | $Enums.Role
     createdAt?: DateTimeFilter<"User"> | Date | string
     posts?: PostListRelationFilter
+    sensors?: SensorListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -3388,6 +4747,7 @@ export namespace Prisma {
     role?: SortOrder
     createdAt?: SortOrder
     posts?: PostOrderByRelationAggregateInput
+    sensors?: SensorOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -3402,6 +4762,7 @@ export namespace Prisma {
     role?: EnumRoleFilter<"User"> | $Enums.Role
     createdAt?: DateTimeFilter<"User"> | Date | string
     posts?: PostListRelationFilter
+    sensors?: SensorListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -3489,6 +4850,88 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
   }
 
+  export type SensorWhereInput = {
+    AND?: SensorWhereInput | SensorWhereInput[]
+    OR?: SensorWhereInput[]
+    NOT?: SensorWhereInput | SensorWhereInput[]
+    id?: IntFilter<"Sensor"> | number
+    name?: StringFilter<"Sensor"> | string
+    serialNumber?: StringFilter<"Sensor"> | string
+    type?: EnumSensorTypeFilter<"Sensor"> | $Enums.SensorType
+    status?: EnumSensorStatusFilter<"Sensor"> | $Enums.SensorStatus
+    description?: StringFilter<"Sensor"> | string
+    img?: StringFilter<"Sensor"> | string
+    dateAdded?: DateTimeFilter<"Sensor"> | Date | string
+    userId?: IntFilter<"Sensor"> | number
+    createdAt?: DateTimeFilter<"Sensor"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type SensorOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    serialNumber?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    description?: SortOrder
+    img?: SortOrder
+    dateAdded?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type SensorWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    serialNumber?: string
+    AND?: SensorWhereInput | SensorWhereInput[]
+    OR?: SensorWhereInput[]
+    NOT?: SensorWhereInput | SensorWhereInput[]
+    name?: StringFilter<"Sensor"> | string
+    type?: EnumSensorTypeFilter<"Sensor"> | $Enums.SensorType
+    status?: EnumSensorStatusFilter<"Sensor"> | $Enums.SensorStatus
+    description?: StringFilter<"Sensor"> | string
+    img?: StringFilter<"Sensor"> | string
+    dateAdded?: DateTimeFilter<"Sensor"> | Date | string
+    userId?: IntFilter<"Sensor"> | number
+    createdAt?: DateTimeFilter<"Sensor"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "serialNumber">
+
+  export type SensorOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    serialNumber?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    description?: SortOrder
+    img?: SortOrder
+    dateAdded?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    _count?: SensorCountOrderByAggregateInput
+    _avg?: SensorAvgOrderByAggregateInput
+    _max?: SensorMaxOrderByAggregateInput
+    _min?: SensorMinOrderByAggregateInput
+    _sum?: SensorSumOrderByAggregateInput
+  }
+
+  export type SensorScalarWhereWithAggregatesInput = {
+    AND?: SensorScalarWhereWithAggregatesInput | SensorScalarWhereWithAggregatesInput[]
+    OR?: SensorScalarWhereWithAggregatesInput[]
+    NOT?: SensorScalarWhereWithAggregatesInput | SensorScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Sensor"> | number
+    name?: StringWithAggregatesFilter<"Sensor"> | string
+    serialNumber?: StringWithAggregatesFilter<"Sensor"> | string
+    type?: EnumSensorTypeWithAggregatesFilter<"Sensor"> | $Enums.SensorType
+    status?: EnumSensorStatusWithAggregatesFilter<"Sensor"> | $Enums.SensorStatus
+    description?: StringWithAggregatesFilter<"Sensor"> | string
+    img?: StringWithAggregatesFilter<"Sensor"> | string
+    dateAdded?: DateTimeWithAggregatesFilter<"Sensor"> | Date | string
+    userId?: IntWithAggregatesFilter<"Sensor"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Sensor"> | Date | string
+  }
+
   export type UserCreateInput = {
     name: string
     email: string
@@ -3497,6 +4940,7 @@ export namespace Prisma {
     role?: $Enums.Role
     createdAt?: Date | string
     posts?: PostCreateNestedManyWithoutUserInput
+    sensors?: SensorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -3508,6 +4952,7 @@ export namespace Prisma {
     role?: $Enums.Role
     createdAt?: Date | string
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    sensors?: SensorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -3518,6 +4963,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUpdateManyWithoutUserNestedInput
+    sensors?: SensorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -3529,6 +4975,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    sensors?: SensorUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -3612,6 +5059,93 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SensorCreateInput = {
+    name: string
+    serialNumber: string
+    type: $Enums.SensorType
+    status?: $Enums.SensorStatus
+    description: string
+    img: string
+    dateAdded?: Date | string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutSensorsInput
+  }
+
+  export type SensorUncheckedCreateInput = {
+    id?: number
+    name: string
+    serialNumber: string
+    type: $Enums.SensorType
+    status?: $Enums.SensorStatus
+    description: string
+    img: string
+    dateAdded?: Date | string
+    userId: number
+    createdAt?: Date | string
+  }
+
+  export type SensorUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    serialNumber?: StringFieldUpdateOperationsInput | string
+    type?: EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+    status?: EnumSensorStatusFieldUpdateOperationsInput | $Enums.SensorStatus
+    description?: StringFieldUpdateOperationsInput | string
+    img?: StringFieldUpdateOperationsInput | string
+    dateAdded?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSensorsNestedInput
+  }
+
+  export type SensorUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    serialNumber?: StringFieldUpdateOperationsInput | string
+    type?: EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+    status?: EnumSensorStatusFieldUpdateOperationsInput | $Enums.SensorStatus
+    description?: StringFieldUpdateOperationsInput | string
+    img?: StringFieldUpdateOperationsInput | string
+    dateAdded?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SensorCreateManyInput = {
+    id?: number
+    name: string
+    serialNumber: string
+    type: $Enums.SensorType
+    status?: $Enums.SensorStatus
+    description: string
+    img: string
+    dateAdded?: Date | string
+    userId: number
+    createdAt?: Date | string
+  }
+
+  export type SensorUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    serialNumber?: StringFieldUpdateOperationsInput | string
+    type?: EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+    status?: EnumSensorStatusFieldUpdateOperationsInput | $Enums.SensorStatus
+    description?: StringFieldUpdateOperationsInput | string
+    img?: StringFieldUpdateOperationsInput | string
+    dateAdded?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SensorUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    serialNumber?: StringFieldUpdateOperationsInput | string
+    type?: EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+    status?: EnumSensorStatusFieldUpdateOperationsInput | $Enums.SensorStatus
+    description?: StringFieldUpdateOperationsInput | string
+    img?: StringFieldUpdateOperationsInput | string
+    dateAdded?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -3662,7 +5196,17 @@ export namespace Prisma {
     none?: PostWhereInput
   }
 
+  export type SensorListRelationFilter = {
+    every?: SensorWhereInput
+    some?: SensorWhereInput
+    none?: SensorWhereInput
+  }
+
   export type PostOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SensorOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -3801,6 +5345,89 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
+  export type EnumSensorTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SensorType | EnumSensorTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SensorType[] | ListEnumSensorTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SensorType[] | ListEnumSensorTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSensorTypeFilter<$PrismaModel> | $Enums.SensorType
+  }
+
+  export type EnumSensorStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SensorStatus | EnumSensorStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SensorStatus[] | ListEnumSensorStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SensorStatus[] | ListEnumSensorStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSensorStatusFilter<$PrismaModel> | $Enums.SensorStatus
+  }
+
+  export type SensorCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    serialNumber?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    description?: SortOrder
+    img?: SortOrder
+    dateAdded?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SensorAvgOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type SensorMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    serialNumber?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    description?: SortOrder
+    img?: SortOrder
+    dateAdded?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SensorMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    serialNumber?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    description?: SortOrder
+    img?: SortOrder
+    dateAdded?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SensorSumOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type EnumSensorTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SensorType | EnumSensorTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SensorType[] | ListEnumSensorTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SensorType[] | ListEnumSensorTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSensorTypeWithAggregatesFilter<$PrismaModel> | $Enums.SensorType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSensorTypeFilter<$PrismaModel>
+    _max?: NestedEnumSensorTypeFilter<$PrismaModel>
+  }
+
+  export type EnumSensorStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SensorStatus | EnumSensorStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SensorStatus[] | ListEnumSensorStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SensorStatus[] | ListEnumSensorStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSensorStatusWithAggregatesFilter<$PrismaModel> | $Enums.SensorStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSensorStatusFilter<$PrismaModel>
+    _max?: NestedEnumSensorStatusFilter<$PrismaModel>
+  }
+
   export type PostCreateNestedManyWithoutUserInput = {
     create?: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput> | PostCreateWithoutUserInput[] | PostUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PostCreateOrConnectWithoutUserInput | PostCreateOrConnectWithoutUserInput[]
@@ -3808,11 +5435,25 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
+  export type SensorCreateNestedManyWithoutUserInput = {
+    create?: XOR<SensorCreateWithoutUserInput, SensorUncheckedCreateWithoutUserInput> | SensorCreateWithoutUserInput[] | SensorUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SensorCreateOrConnectWithoutUserInput | SensorCreateOrConnectWithoutUserInput[]
+    createMany?: SensorCreateManyUserInputEnvelope
+    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+  }
+
   export type PostUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<PostCreateWithoutUserInput, PostUncheckedCreateWithoutUserInput> | PostCreateWithoutUserInput[] | PostUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PostCreateOrConnectWithoutUserInput | PostCreateOrConnectWithoutUserInput[]
     createMany?: PostCreateManyUserInputEnvelope
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type SensorUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SensorCreateWithoutUserInput, SensorUncheckedCreateWithoutUserInput> | SensorCreateWithoutUserInput[] | SensorUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SensorCreateOrConnectWithoutUserInput | SensorCreateOrConnectWithoutUserInput[]
+    createMany?: SensorCreateManyUserInputEnvelope
+    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -3841,6 +5482,20 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type SensorUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SensorCreateWithoutUserInput, SensorUncheckedCreateWithoutUserInput> | SensorCreateWithoutUserInput[] | SensorUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SensorCreateOrConnectWithoutUserInput | SensorCreateOrConnectWithoutUserInput[]
+    upsert?: SensorUpsertWithWhereUniqueWithoutUserInput | SensorUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SensorCreateManyUserInputEnvelope
+    set?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    disconnect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    delete?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    update?: SensorUpdateWithWhereUniqueWithoutUserInput | SensorUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SensorUpdateManyWithWhereWithoutUserInput | SensorUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -3863,6 +5518,20 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type SensorUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SensorCreateWithoutUserInput, SensorUncheckedCreateWithoutUserInput> | SensorCreateWithoutUserInput[] | SensorUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SensorCreateOrConnectWithoutUserInput | SensorCreateOrConnectWithoutUserInput[]
+    upsert?: SensorUpsertWithWhereUniqueWithoutUserInput | SensorUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SensorCreateManyUserInputEnvelope
+    set?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    disconnect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    delete?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    update?: SensorUpdateWithWhereUniqueWithoutUserInput | SensorUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SensorUpdateManyWithWhereWithoutUserInput | SensorUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutPostsInput = {
     create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPostsInput
@@ -3875,6 +5544,28 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutPostsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostsInput, UserUpdateWithoutPostsInput>, UserUncheckedUpdateWithoutPostsInput>
+  }
+
+  export type UserCreateNestedOneWithoutSensorsInput = {
+    create?: XOR<UserCreateWithoutSensorsInput, UserUncheckedCreateWithoutSensorsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSensorsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumSensorTypeFieldUpdateOperationsInput = {
+    set?: $Enums.SensorType
+  }
+
+  export type EnumSensorStatusFieldUpdateOperationsInput = {
+    set?: $Enums.SensorStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutSensorsNestedInput = {
+    create?: XOR<UserCreateWithoutSensorsInput, UserUncheckedCreateWithoutSensorsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSensorsInput
+    upsert?: UserUpsertWithoutSensorsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSensorsInput, UserUpdateWithoutSensorsInput>, UserUncheckedUpdateWithoutSensorsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -3988,6 +5679,40 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumSensorTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SensorType | EnumSensorTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SensorType[] | ListEnumSensorTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SensorType[] | ListEnumSensorTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSensorTypeFilter<$PrismaModel> | $Enums.SensorType
+  }
+
+  export type NestedEnumSensorStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SensorStatus | EnumSensorStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SensorStatus[] | ListEnumSensorStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SensorStatus[] | ListEnumSensorStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSensorStatusFilter<$PrismaModel> | $Enums.SensorStatus
+  }
+
+  export type NestedEnumSensorTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SensorType | EnumSensorTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SensorType[] | ListEnumSensorTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SensorType[] | ListEnumSensorTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSensorTypeWithAggregatesFilter<$PrismaModel> | $Enums.SensorType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSensorTypeFilter<$PrismaModel>
+    _max?: NestedEnumSensorTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSensorStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SensorStatus | EnumSensorStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SensorStatus[] | ListEnumSensorStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SensorStatus[] | ListEnumSensorStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSensorStatusWithAggregatesFilter<$PrismaModel> | $Enums.SensorStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSensorStatusFilter<$PrismaModel>
+    _max?: NestedEnumSensorStatusFilter<$PrismaModel>
+  }
+
   export type PostCreateWithoutUserInput = {
     title: string
     content: string
@@ -4008,6 +5733,39 @@ export namespace Prisma {
 
   export type PostCreateManyUserInputEnvelope = {
     data: PostCreateManyUserInput | PostCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SensorCreateWithoutUserInput = {
+    name: string
+    serialNumber: string
+    type: $Enums.SensorType
+    status?: $Enums.SensorStatus
+    description: string
+    img: string
+    dateAdded?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type SensorUncheckedCreateWithoutUserInput = {
+    id?: number
+    name: string
+    serialNumber: string
+    type: $Enums.SensorType
+    status?: $Enums.SensorStatus
+    description: string
+    img: string
+    dateAdded?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type SensorCreateOrConnectWithoutUserInput = {
+    where: SensorWhereUniqueInput
+    create: XOR<SensorCreateWithoutUserInput, SensorUncheckedCreateWithoutUserInput>
+  }
+
+  export type SensorCreateManyUserInputEnvelope = {
+    data: SensorCreateManyUserInput | SensorCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -4038,6 +5796,38 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Post"> | Date | string
   }
 
+  export type SensorUpsertWithWhereUniqueWithoutUserInput = {
+    where: SensorWhereUniqueInput
+    update: XOR<SensorUpdateWithoutUserInput, SensorUncheckedUpdateWithoutUserInput>
+    create: XOR<SensorCreateWithoutUserInput, SensorUncheckedCreateWithoutUserInput>
+  }
+
+  export type SensorUpdateWithWhereUniqueWithoutUserInput = {
+    where: SensorWhereUniqueInput
+    data: XOR<SensorUpdateWithoutUserInput, SensorUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SensorUpdateManyWithWhereWithoutUserInput = {
+    where: SensorScalarWhereInput
+    data: XOR<SensorUpdateManyMutationInput, SensorUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SensorScalarWhereInput = {
+    AND?: SensorScalarWhereInput | SensorScalarWhereInput[]
+    OR?: SensorScalarWhereInput[]
+    NOT?: SensorScalarWhereInput | SensorScalarWhereInput[]
+    id?: IntFilter<"Sensor"> | number
+    name?: StringFilter<"Sensor"> | string
+    serialNumber?: StringFilter<"Sensor"> | string
+    type?: EnumSensorTypeFilter<"Sensor"> | $Enums.SensorType
+    status?: EnumSensorStatusFilter<"Sensor"> | $Enums.SensorStatus
+    description?: StringFilter<"Sensor"> | string
+    img?: StringFilter<"Sensor"> | string
+    dateAdded?: DateTimeFilter<"Sensor"> | Date | string
+    userId?: IntFilter<"Sensor"> | number
+    createdAt?: DateTimeFilter<"Sensor"> | Date | string
+  }
+
   export type UserCreateWithoutPostsInput = {
     name: string
     email: string
@@ -4045,6 +5835,7 @@ export namespace Prisma {
     refreshToken: string
     role?: $Enums.Role
     createdAt?: Date | string
+    sensors?: SensorCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -4055,6 +5846,7 @@ export namespace Prisma {
     refreshToken: string
     role?: $Enums.Role
     createdAt?: Date | string
+    sensors?: SensorUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -4080,6 +5872,7 @@ export namespace Prisma {
     refreshToken?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sensors?: SensorUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -4090,12 +5883,83 @@ export namespace Prisma {
     refreshToken?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sensors?: SensorUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutSensorsInput = {
+    name: string
+    email: string
+    password: string
+    refreshToken: string
+    role?: $Enums.Role
+    createdAt?: Date | string
+    posts?: PostCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutSensorsInput = {
+    id?: number
+    name: string
+    email: string
+    password: string
+    refreshToken: string
+    role?: $Enums.Role
+    createdAt?: Date | string
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutSensorsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSensorsInput, UserUncheckedCreateWithoutSensorsInput>
+  }
+
+  export type UserUpsertWithoutSensorsInput = {
+    update: XOR<UserUpdateWithoutSensorsInput, UserUncheckedUpdateWithoutSensorsInput>
+    create: XOR<UserCreateWithoutSensorsInput, UserUncheckedCreateWithoutSensorsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSensorsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSensorsInput, UserUncheckedUpdateWithoutSensorsInput>
+  }
+
+  export type UserUpdateWithoutSensorsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    refreshToken?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: PostUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSensorsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    refreshToken?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostCreateManyUserInput = {
     id?: number
     title: string
     content: string
+    createdAt?: Date | string
+  }
+
+  export type SensorCreateManyUserInput = {
+    id?: number
+    name: string
+    serialNumber: string
+    type: $Enums.SensorType
+    status?: $Enums.SensorStatus
+    description: string
+    img: string
+    dateAdded?: Date | string
     createdAt?: Date | string
   }
 
@@ -4116,6 +5980,41 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SensorUpdateWithoutUserInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    serialNumber?: StringFieldUpdateOperationsInput | string
+    type?: EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+    status?: EnumSensorStatusFieldUpdateOperationsInput | $Enums.SensorStatus
+    description?: StringFieldUpdateOperationsInput | string
+    img?: StringFieldUpdateOperationsInput | string
+    dateAdded?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SensorUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    serialNumber?: StringFieldUpdateOperationsInput | string
+    type?: EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+    status?: EnumSensorStatusFieldUpdateOperationsInput | $Enums.SensorStatus
+    description?: StringFieldUpdateOperationsInput | string
+    img?: StringFieldUpdateOperationsInput | string
+    dateAdded?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SensorUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    serialNumber?: StringFieldUpdateOperationsInput | string
+    type?: EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+    status?: EnumSensorStatusFieldUpdateOperationsInput | $Enums.SensorStatus
+    description?: StringFieldUpdateOperationsInput | string
+    img?: StringFieldUpdateOperationsInput | string
+    dateAdded?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

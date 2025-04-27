@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { FilesModule } from './files/files.module';
 import { PostModule } from './post/post.module';
+import { SensorsModule } from './sensors/sensors.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { PostModule } from './post/post.module';
     AuthModule,
     FilesModule,
     PostModule,
+    SensorsModule,
   ],
   controllers: [AppController],
   providers: [AppService,

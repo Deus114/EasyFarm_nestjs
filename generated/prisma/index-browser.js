@@ -135,6 +135,19 @@ exports.Prisma.PostScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.SensorScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  serialNumber: 'serialNumber',
+  type: 'type',
+  status: 'status',
+  description: 'description',
+  img: 'img',
+  dateAdded: 'dateAdded',
+  userId: 'userId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -149,9 +162,21 @@ exports.Role = exports.$Enums.Role = {
   ADMIN: 'ADMIN'
 };
 
+exports.SensorType = exports.$Enums.SensorType = {
+  TEMPERATURE: 'TEMPERATURE',
+  HUMIDITY: 'HUMIDITY',
+  TEMPERATURE_HUMIDITY: 'TEMPERATURE_HUMIDITY'
+};
+
+exports.SensorStatus = exports.$Enums.SensorStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
-  Post: 'Post'
+  Post: 'Post',
+  Sensor: 'Sensor'
 };
 
 /**

@@ -30,10 +30,11 @@ export class UsersController {
   }
 
   @ResponseMessage('Cập nhật người dùng thành công')
-  @Patch()
+  @Patch(':id')
   async update(
+    @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto) {
-    let updatedUser = await this.usersService.update(updateUserDto);
+    let updatedUser = await this.usersService.update(+id, updateUserDto);
     return updatedUser;
   }
 

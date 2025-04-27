@@ -67,7 +67,7 @@ export class UsersService {
   }
 
   async findAll() {
-    return this.prisma.user.findMany({
+    return await this.prisma.user.findMany({
       select: {
         id: true,
         name: true,
@@ -98,11 +98,11 @@ export class UsersService {
     return compareSync(password, hash);
   }
 
-  async update(updateUserDto: UpdateUserDto) {
-    await this.findOne(updateUserDto.id); // Check user exists
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    await this.findOne(id); // Check user exists
 
     const updatedUser = await this.prisma.user.update({
-      where: { id: updateUserDto.id },
+      where: { id: id },
       data: {
         name: updateUserDto.name,
         email: updateUserDto.email,
