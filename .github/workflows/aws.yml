@@ -21,7 +21,7 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/easy-farm:latest .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/easy-farm:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/easy-farm:latest
 
       - name: SSH into EC2 and deploy
