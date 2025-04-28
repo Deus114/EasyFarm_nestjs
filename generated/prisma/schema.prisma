@@ -21,24 +21,27 @@ enum Role {
 }
 
 model User {
-  id           Int      @id @default(autoincrement())
-  name         String
-  email        String   @unique
-  password     String
-  posts        Post[]   @relation("UserPosts")
-  sensors      Sensor[] @relation("UserSensors")
-  refreshToken String
-  role         Role     @default(USER)
-  createdAt    DateTime @default(now())
+  id            Int            @id @default(autoincrement())
+  name          String
+  email         String         @unique
+  password      String
+  posts         Post[]         @relation("UserPosts")
+  sensors       Sensor[]       @relation("UserSensors")
+  schedules     Schedule[]     @relation("UserSchedules")
+  notifications Notification[] @relation("UserNotifications")
+  refreshToken  String
+  role          Role           @default(USER)
+  createdAt     DateTime       @default(now())
 }
 
 model Post {
   id        Int      @id @default(autoincrement())
   title     String
   content   String
-  user      User     @relation("UserPosts", fields: [userId], references: [id])
   userId    Int
   createdAt DateTime @default(now())
+
+  user User @relation("UserPosts", fields: [userId], references: [id])
 }
 
 model Sensor {
@@ -48,11 +51,45 @@ model Sensor {
   type         SensorType
   status       SensorStatus @default(ACTIVE)
   description  String
-  img          String
+  img          String?
   dateAdded    DateTime     @default(now())
-  user         User         @relation("UserSensors", fields: [userId], references: [id])
   userId       Int
   createdAt    DateTime     @default(now())
+
+  user User @relation("UserSensors", fields: [userId], references: [id])
+}
+
+model Schedule {
+  id          Int        @id @default(autoincrement())
+  title       String
+  userId      Int
+  description String?
+  startTime   String // VD: "15:00"
+  repeatType  RepeatType
+  repeatDays  Int[]      @default([])
+  repeatDates Int[]      @default([])
+  isActive    Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  user User @relation("UserSchedules", fields: [userId], references: [id])
+}
+
+model Notification {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  title       String
+  description String
+  isRead      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  user User @relation("UserNotifications", fields: [userId], references: [id])
+}
+
+enum RepeatType {
+  DAILY
+  WEEKLY
+  MONTHLY
 }
 
 enum SensorType {

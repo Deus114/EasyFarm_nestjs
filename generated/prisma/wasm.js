@@ -148,6 +148,29 @@ exports.Prisma.SensorScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.ScheduleScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  userId: 'userId',
+  description: 'description',
+  startTime: 'startTime',
+  repeatType: 'repeatType',
+  repeatDays: 'repeatDays',
+  repeatDates: 'repeatDates',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  description: 'description',
+  isRead: 'isRead',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -156,6 +179,11 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 exports.Role = exports.$Enums.Role = {
   USER: 'USER',
@@ -173,10 +201,18 @@ exports.SensorStatus = exports.$Enums.SensorStatus = {
   INACTIVE: 'INACTIVE'
 };
 
+exports.RepeatType = exports.$Enums.RepeatType = {
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Post: 'Post',
-  Sensor: 'Sensor'
+  Sensor: 'Sensor',
+  Schedule: 'Schedule',
+  Notification: 'Notification'
 };
 
 /**
