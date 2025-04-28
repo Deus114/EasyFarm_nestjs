@@ -32,7 +32,7 @@ export class ScheduleService {
     return schedule;
   }
 
-  getRepeatOptions(schedule: any) {
+  getRepeatOptions(schedule: CreateScheduleDto) {
     const [hour, minute] = schedule.startTime.split(':').map(Number);
 
     if (schedule.repeatType === 'DAILY') {

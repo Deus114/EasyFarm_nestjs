@@ -8,7 +8,7 @@ export class CreateScheduleDto {
     userId: number;
 
     @ApiProperty()
-    @IsNotEmpty()
+    @IsNotEmpty({ message: "Title không được để trống" })
     @IsString()
     title: string;
 
@@ -17,10 +17,11 @@ export class CreateScheduleDto {
     description: string;
 
     @ApiProperty()
-    @IsNotEmpty()
+    @IsNotEmpty({ message: "StartTime không được để trống" })
     startTime: string; // "HH:mm"
 
     @ApiProperty()
+    @IsNotEmpty({ message: "RepeatType không được để trống" })
     @IsEnum(RepeatType)
     repeatType: RepeatType;
 
