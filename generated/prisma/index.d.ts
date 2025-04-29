@@ -4875,6 +4875,7 @@ export namespace Prisma {
     repeatType: number
     repeatDays: number
     repeatDates: number
+    jobKeys: number
     isActive: number
     createdAt: number
     updatedAt: number
@@ -4929,6 +4930,7 @@ export namespace Prisma {
     repeatType?: true
     repeatDays?: true
     repeatDates?: true
+    jobKeys?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -5030,6 +5032,7 @@ export namespace Prisma {
     repeatType: $Enums.RepeatType
     repeatDays: number[]
     repeatDates: number[]
+    jobKeys: string[]
     isActive: boolean
     createdAt: Date
     updatedAt: Date
@@ -5063,6 +5066,7 @@ export namespace Prisma {
     repeatType?: boolean
     repeatDays?: boolean
     repeatDates?: boolean
+    jobKeys?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -5078,6 +5082,7 @@ export namespace Prisma {
     repeatType?: boolean
     repeatDays?: boolean
     repeatDates?: boolean
+    jobKeys?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -5093,6 +5098,7 @@ export namespace Prisma {
     repeatType?: boolean
     repeatDays?: boolean
     repeatDates?: boolean
+    jobKeys?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -5108,12 +5114,13 @@ export namespace Prisma {
     repeatType?: boolean
     repeatDays?: boolean
     repeatDates?: boolean
+    jobKeys?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "userId" | "description" | "startTime" | "repeatType" | "repeatDays" | "repeatDates" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["schedule"]>
+  export type ScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "userId" | "description" | "startTime" | "repeatType" | "repeatDays" | "repeatDates" | "jobKeys" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["schedule"]>
   export type ScheduleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -5138,6 +5145,7 @@ export namespace Prisma {
       repeatType: $Enums.RepeatType
       repeatDays: number[]
       repeatDates: number[]
+      jobKeys: string[]
       isActive: boolean
       createdAt: Date
       updatedAt: Date
@@ -5573,6 +5581,7 @@ export namespace Prisma {
     readonly repeatType: FieldRef<"Schedule", 'RepeatType'>
     readonly repeatDays: FieldRef<"Schedule", 'Int[]'>
     readonly repeatDates: FieldRef<"Schedule", 'Int[]'>
+    readonly jobKeys: FieldRef<"Schedule", 'String[]'>
     readonly isActive: FieldRef<"Schedule", 'Boolean'>
     readonly createdAt: FieldRef<"Schedule", 'DateTime'>
     readonly updatedAt: FieldRef<"Schedule", 'DateTime'>
@@ -7162,6 +7171,7 @@ export namespace Prisma {
     repeatType: 'repeatType',
     repeatDays: 'repeatDays',
     repeatDates: 'repeatDates',
+    jobKeys: 'jobKeys',
     isActive: 'isActive',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -7560,6 +7570,7 @@ export namespace Prisma {
     repeatType?: EnumRepeatTypeFilter<"Schedule"> | $Enums.RepeatType
     repeatDays?: IntNullableListFilter<"Schedule">
     repeatDates?: IntNullableListFilter<"Schedule">
+    jobKeys?: StringNullableListFilter<"Schedule">
     isActive?: BoolFilter<"Schedule"> | boolean
     createdAt?: DateTimeFilter<"Schedule"> | Date | string
     updatedAt?: DateTimeFilter<"Schedule"> | Date | string
@@ -7575,6 +7586,7 @@ export namespace Prisma {
     repeatType?: SortOrder
     repeatDays?: SortOrder
     repeatDates?: SortOrder
+    jobKeys?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7593,6 +7605,7 @@ export namespace Prisma {
     repeatType?: EnumRepeatTypeFilter<"Schedule"> | $Enums.RepeatType
     repeatDays?: IntNullableListFilter<"Schedule">
     repeatDates?: IntNullableListFilter<"Schedule">
+    jobKeys?: StringNullableListFilter<"Schedule">
     isActive?: BoolFilter<"Schedule"> | boolean
     createdAt?: DateTimeFilter<"Schedule"> | Date | string
     updatedAt?: DateTimeFilter<"Schedule"> | Date | string
@@ -7608,6 +7621,7 @@ export namespace Prisma {
     repeatType?: SortOrder
     repeatDays?: SortOrder
     repeatDates?: SortOrder
+    jobKeys?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7630,6 +7644,7 @@ export namespace Prisma {
     repeatType?: EnumRepeatTypeWithAggregatesFilter<"Schedule"> | $Enums.RepeatType
     repeatDays?: IntNullableListFilter<"Schedule">
     repeatDates?: IntNullableListFilter<"Schedule">
+    jobKeys?: StringNullableListFilter<"Schedule">
     isActive?: BoolWithAggregatesFilter<"Schedule"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Schedule"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Schedule"> | Date | string
@@ -7926,6 +7941,7 @@ export namespace Prisma {
     repeatType: $Enums.RepeatType
     repeatDays?: ScheduleCreaterepeatDaysInput | number[]
     repeatDates?: ScheduleCreaterepeatDatesInput | number[]
+    jobKeys?: ScheduleCreatejobKeysInput | string[]
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7941,6 +7957,7 @@ export namespace Prisma {
     repeatType: $Enums.RepeatType
     repeatDays?: ScheduleCreaterepeatDaysInput | number[]
     repeatDates?: ScheduleCreaterepeatDatesInput | number[]
+    jobKeys?: ScheduleCreatejobKeysInput | string[]
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7953,6 +7970,7 @@ export namespace Prisma {
     repeatType?: EnumRepeatTypeFieldUpdateOperationsInput | $Enums.RepeatType
     repeatDays?: ScheduleUpdaterepeatDaysInput | number[]
     repeatDates?: ScheduleUpdaterepeatDatesInput | number[]
+    jobKeys?: ScheduleUpdatejobKeysInput | string[]
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7968,6 +7986,7 @@ export namespace Prisma {
     repeatType?: EnumRepeatTypeFieldUpdateOperationsInput | $Enums.RepeatType
     repeatDays?: ScheduleUpdaterepeatDaysInput | number[]
     repeatDates?: ScheduleUpdaterepeatDatesInput | number[]
+    jobKeys?: ScheduleUpdatejobKeysInput | string[]
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7982,6 +8001,7 @@ export namespace Prisma {
     repeatType: $Enums.RepeatType
     repeatDays?: ScheduleCreaterepeatDaysInput | number[]
     repeatDates?: ScheduleCreaterepeatDatesInput | number[]
+    jobKeys?: ScheduleCreatejobKeysInput | string[]
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7994,6 +8014,7 @@ export namespace Prisma {
     repeatType?: EnumRepeatTypeFieldUpdateOperationsInput | $Enums.RepeatType
     repeatDays?: ScheduleUpdaterepeatDaysInput | number[]
     repeatDates?: ScheduleUpdaterepeatDatesInput | number[]
+    jobKeys?: ScheduleUpdatejobKeysInput | string[]
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8008,6 +8029,7 @@ export namespace Prisma {
     repeatType?: EnumRepeatTypeFieldUpdateOperationsInput | $Enums.RepeatType
     repeatDays?: ScheduleUpdaterepeatDaysInput | number[]
     repeatDates?: ScheduleUpdaterepeatDatesInput | number[]
+    jobKeys?: ScheduleUpdatejobKeysInput | string[]
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8427,6 +8449,14 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -8441,6 +8471,7 @@ export namespace Prisma {
     repeatType?: SortOrder
     repeatDays?: SortOrder
     repeatDates?: SortOrder
+    jobKeys?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8775,6 +8806,10 @@ export namespace Prisma {
     set: number[]
   }
 
+  export type ScheduleCreatejobKeysInput = {
+    set: string[]
+  }
+
   export type UserCreateNestedOneWithoutSchedulesInput = {
     create?: XOR<UserCreateWithoutSchedulesInput, UserUncheckedCreateWithoutSchedulesInput>
     connectOrCreate?: UserCreateOrConnectWithoutSchedulesInput
@@ -8793,6 +8828,11 @@ export namespace Prisma {
   export type ScheduleUpdaterepeatDatesInput = {
     set?: number[]
     push?: number | number[]
+  }
+
+  export type ScheduleUpdatejobKeysInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -9101,6 +9141,7 @@ export namespace Prisma {
     repeatType: $Enums.RepeatType
     repeatDays?: ScheduleCreaterepeatDaysInput | number[]
     repeatDates?: ScheduleCreaterepeatDatesInput | number[]
+    jobKeys?: ScheduleCreatejobKeysInput | string[]
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9114,6 +9155,7 @@ export namespace Prisma {
     repeatType: $Enums.RepeatType
     repeatDays?: ScheduleCreaterepeatDaysInput | number[]
     repeatDates?: ScheduleCreaterepeatDatesInput | number[]
+    jobKeys?: ScheduleCreatejobKeysInput | string[]
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9241,6 +9283,7 @@ export namespace Prisma {
     repeatType?: EnumRepeatTypeFilter<"Schedule"> | $Enums.RepeatType
     repeatDays?: IntNullableListFilter<"Schedule">
     repeatDates?: IntNullableListFilter<"Schedule">
+    jobKeys?: StringNullableListFilter<"Schedule">
     isActive?: BoolFilter<"Schedule"> | boolean
     createdAt?: DateTimeFilter<"Schedule"> | Date | string
     updatedAt?: DateTimeFilter<"Schedule"> | Date | string
@@ -9565,6 +9608,7 @@ export namespace Prisma {
     repeatType: $Enums.RepeatType
     repeatDays?: ScheduleCreaterepeatDaysInput | number[]
     repeatDates?: ScheduleCreaterepeatDatesInput | number[]
+    jobKeys?: ScheduleCreatejobKeysInput | string[]
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9640,6 +9684,7 @@ export namespace Prisma {
     repeatType?: EnumRepeatTypeFieldUpdateOperationsInput | $Enums.RepeatType
     repeatDays?: ScheduleUpdaterepeatDaysInput | number[]
     repeatDates?: ScheduleUpdaterepeatDatesInput | number[]
+    jobKeys?: ScheduleUpdatejobKeysInput | string[]
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9653,6 +9698,7 @@ export namespace Prisma {
     repeatType?: EnumRepeatTypeFieldUpdateOperationsInput | $Enums.RepeatType
     repeatDays?: ScheduleUpdaterepeatDaysInput | number[]
     repeatDates?: ScheduleUpdaterepeatDatesInput | number[]
+    jobKeys?: ScheduleUpdatejobKeysInput | string[]
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9666,6 +9712,7 @@ export namespace Prisma {
     repeatType?: EnumRepeatTypeFieldUpdateOperationsInput | $Enums.RepeatType
     repeatDays?: ScheduleUpdaterepeatDaysInput | number[]
     repeatDates?: ScheduleUpdaterepeatDatesInput | number[]
+    jobKeys?: ScheduleUpdatejobKeysInput | string[]
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

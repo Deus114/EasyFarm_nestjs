@@ -157,6 +157,7 @@ exports.Prisma.ScheduleScalarFieldEnum = {
   repeatType: 'repeatType',
   repeatDays: 'repeatDays',
   repeatDates: 'repeatDates',
+  jobKeys: 'jobKeys',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

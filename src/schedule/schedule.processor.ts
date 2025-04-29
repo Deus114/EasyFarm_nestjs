@@ -1,6 +1,6 @@
 import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { NotificationsService } from 'src/notifications/notifications.service';
 
 @Processor('schedule')
@@ -11,8 +11,8 @@ export class ScheduleProcessor {
     @Process('send-notification')
     async handleScheduleNotification(job: Job) {
         const { userId, title, description } = job.data;
-
-        // 🛎 Chỉ tạo 1 thông báo trong database
+        console.log('⏰ Job fired: send-notification', job.data);
+        // Chỉ tạo 1 thông báo trong database
         await this.notificationsService.createNotification(
             userId,
             `Đã đến giờ thực hiện lịch: ${title}`,
