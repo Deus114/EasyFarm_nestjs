@@ -41,6 +41,6 @@ export class UsersController {
   @ResponseMessage('Xóa người dùng thành công')
   @Delete(':id')
   remove(@Param('id') id: number) {
-    return this.usersService.remove(id);
+    return this.usersService.remove(+id);
   }
 }

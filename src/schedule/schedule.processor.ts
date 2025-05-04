@@ -11,7 +11,7 @@ export class ScheduleProcessor {
     @Process('send-notification')
     async handleScheduleNotification(job: Job) {
         const { userId, title, description } = job.data;
-        console.log('⏰ Job fired: send-notification', job.data);
+        // console.log('Job fired: send-notification', job.data);
         // Chỉ tạo 1 thông báo trong database
         await this.notificationsService.createNotification(
             userId,

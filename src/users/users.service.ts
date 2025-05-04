@@ -80,7 +80,7 @@ export class UsersService {
 
   async findOne(id: number) {
     const user = await this.prisma.user.findUnique({
-      where: { id },
+      where: { id: Number(id) },
     });
     if (!user) {
       throw new BadRequestException(`User with id ${id} not found`);
@@ -113,13 +113,11 @@ export class UsersService {
   }
 
   async remove(id: number) {
-    await this.findOne(id); // Check user exists
+    await this.findOne(id);
 
-    await this.prisma.user.delete({
+    return await this.prisma.user.delete({
       where: { id },
     });
-
-    return { message: `User with id ${id} deleted successfully` };
   }
 
   async updateRefreshToken(refreshToken: string, id: number) {
