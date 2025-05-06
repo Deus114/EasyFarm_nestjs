@@ -6,6 +6,7 @@ import { RegisterUserDto, UserLoginDto } from 'src/users/dto/create-user.dto';
 import { Request as RequestExpress, Response } from 'express';
 import { IUser } from 'src/users/user.interface';
 import { ApiBody } from '@nestjs/swagger';
+import { ForgotPassDto, ResetPassDto, VerifyOtpDto } from './dto/forgot-pass.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -57,6 +58,32 @@ export class AuthController {
         @Res({ passthrough: true }) response: Response
     ) {
         return this.authService.logout(user, response);
+    }
+
+    // Gửi OTP
+    @Public()
+    @ResponseMessage("Đã gửi otp")
+    @Post('/forgot-password')
+    async forgotPassword(@Body() forgotPassDto: ForgotPassDto) {
+        return this.authService.sendForgotPasswordOtp(forgotPassDto.email);
+    }
+
+    // Xác thực OTP
+    @Public()
+    @ResponseMessage("Xác thực otp thành công!")
+    @Post('/verify-otp')
+    async verifyOtp(@Body() verifyOtpDto: VerifyOtpDto) {
+        return this.authService.verifyOtp(verifyOtpDto.email, verifyOtpDto.otp);
+    }
+
+    // Đổi mật khẩu
+    @Public()
+    @ResponseMessage("Đặt lại mật khẩu thành công!")
+    @Post('/reset-password')
+    async resetPassword(
+        @Body() resetPassDto: ResetPassDto,
+    ) {
+        return this.authService.resetPassword(resetPassDto.email, resetPassDto.newPassword);
     }
 
 }

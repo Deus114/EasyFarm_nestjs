@@ -31,6 +31,8 @@ model User {
   notifications Notification[] @relation("UserNotifications")
   refreshToken  String
   role          Role           @default(USER)
+  otp           String?
+  otpExpiresAt  DateTime?
   createdAt     DateTime       @default(now())
 }
 

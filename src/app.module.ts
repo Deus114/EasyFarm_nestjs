@@ -10,6 +10,7 @@ import { SensorsModule } from './sensors/sensors.module';
 import { BullModule } from '@nestjs/bull';
 import { ScheduleModule } from './schedule/schedule.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { NotificationsModule } from './notifications/notifications.module';
     SensorsModule,
     ScheduleModule,
     NotificationsModule,
+    MailModule,
   ],
   controllers: [AppController],
   providers: [AppService,

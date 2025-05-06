@@ -21,17 +21,19 @@ enum Role {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  password  String
-  posts     Post[]   @relation("UserPosts")
-  sensors   Sensor[] @relation("UserSensors")
-  schedules Schedule[]   @relation("UserSchedules")
-  notifications Notification[]   @relation("UserNotifications")
-  refreshToken String
-  role      Role     @default(USER)
-  createdAt DateTime @default(now())
+  id             Int      @id @default(autoincrement())
+  name           String
+  email          String   @unique
+  password       String
+  posts          Post[]   @relation("UserPosts")
+  sensors        Sensor[] @relation("UserSensors")
+  schedules      Schedule[]   @relation("UserSchedules")
+  notifications  Notification[]   @relation("UserNotifications")
+  refreshToken   String
+  role           Role     @default(USER)
+  otp            String?
+  otpExpiresAt   DateTime?
+  createdAt      DateTime @default(now())
 }
 
 model Post {

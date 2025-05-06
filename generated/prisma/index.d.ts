@@ -1372,6 +1372,8 @@ export namespace Prisma {
     password: string | null
     refreshToken: string | null
     role: $Enums.Role | null
+    otp: string | null
+    otpExpiresAt: Date | null
     createdAt: Date | null
   }
 
@@ -1382,6 +1384,8 @@ export namespace Prisma {
     password: string | null
     refreshToken: string | null
     role: $Enums.Role | null
+    otp: string | null
+    otpExpiresAt: Date | null
     createdAt: Date | null
   }
 
@@ -1392,6 +1396,8 @@ export namespace Prisma {
     password: number
     refreshToken: number
     role: number
+    otp: number
+    otpExpiresAt: number
     createdAt: number
     _all: number
   }
@@ -1412,6 +1418,8 @@ export namespace Prisma {
     password?: true
     refreshToken?: true
     role?: true
+    otp?: true
+    otpExpiresAt?: true
     createdAt?: true
   }
 
@@ -1422,6 +1430,8 @@ export namespace Prisma {
     password?: true
     refreshToken?: true
     role?: true
+    otp?: true
+    otpExpiresAt?: true
     createdAt?: true
   }
 
@@ -1432,6 +1442,8 @@ export namespace Prisma {
     password?: true
     refreshToken?: true
     role?: true
+    otp?: true
+    otpExpiresAt?: true
     createdAt?: true
     _all?: true
   }
@@ -1529,6 +1541,8 @@ export namespace Prisma {
     password: string
     refreshToken: string
     role: $Enums.Role
+    otp: string | null
+    otpExpiresAt: Date | null
     createdAt: Date
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
@@ -1558,6 +1572,8 @@ export namespace Prisma {
     password?: boolean
     refreshToken?: boolean
     role?: boolean
+    otp?: boolean
+    otpExpiresAt?: boolean
     createdAt?: boolean
     posts?: boolean | User$postsArgs<ExtArgs>
     sensors?: boolean | User$sensorsArgs<ExtArgs>
@@ -1573,6 +1589,8 @@ export namespace Prisma {
     password?: boolean
     refreshToken?: boolean
     role?: boolean
+    otp?: boolean
+    otpExpiresAt?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1583,6 +1601,8 @@ export namespace Prisma {
     password?: boolean
     refreshToken?: boolean
     role?: boolean
+    otp?: boolean
+    otpExpiresAt?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1593,10 +1613,12 @@ export namespace Prisma {
     password?: boolean
     refreshToken?: boolean
     role?: boolean
+    otp?: boolean
+    otpExpiresAt?: boolean
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "refreshToken" | "role" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "refreshToken" | "role" | "otp" | "otpExpiresAt" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | User$postsArgs<ExtArgs>
     sensors?: boolean | User$sensorsArgs<ExtArgs>
@@ -1622,6 +1644,8 @@ export namespace Prisma {
       password: string
       refreshToken: string
       role: $Enums.Role
+      otp: string | null
+      otpExpiresAt: Date | null
       createdAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -2056,6 +2080,8 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly refreshToken: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'Role'>
+    readonly otp: FieldRef<"User", 'String'>
+    readonly otpExpiresAt: FieldRef<"User", 'DateTime'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
   }
     
@@ -7129,6 +7155,8 @@ export namespace Prisma {
     password: 'password',
     refreshToken: 'refreshToken',
     role: 'role',
+    otp: 'otp',
+    otpExpiresAt: 'otpExpiresAt',
     createdAt: 'createdAt'
   };
 
@@ -7353,6 +7381,8 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     refreshToken?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
+    otp?: StringNullableFilter<"User"> | string | null
+    otpExpiresAt?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     posts?: PostListRelationFilter
     sensors?: SensorListRelationFilter
@@ -7367,6 +7397,8 @@ export namespace Prisma {
     password?: SortOrder
     refreshToken?: SortOrder
     role?: SortOrder
+    otp?: SortOrderInput | SortOrder
+    otpExpiresAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     posts?: PostOrderByRelationAggregateInput
     sensors?: SensorOrderByRelationAggregateInput
@@ -7384,6 +7416,8 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     refreshToken?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
+    otp?: StringNullableFilter<"User"> | string | null
+    otpExpiresAt?: DateTimeNullableFilter<"User"> | Date | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     posts?: PostListRelationFilter
     sensors?: SensorListRelationFilter
@@ -7398,6 +7432,8 @@ export namespace Prisma {
     password?: SortOrder
     refreshToken?: SortOrder
     role?: SortOrder
+    otp?: SortOrderInput | SortOrder
+    otpExpiresAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
@@ -7416,6 +7452,8 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     refreshToken?: StringWithAggregatesFilter<"User"> | string
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
+    otp?: StringNullableWithAggregatesFilter<"User"> | string | null
+    otpExpiresAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
@@ -7718,6 +7756,8 @@ export namespace Prisma {
     password: string
     refreshToken: string
     role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
     createdAt?: Date | string
     posts?: PostCreateNestedManyWithoutUserInput
     sensors?: SensorCreateNestedManyWithoutUserInput
@@ -7732,6 +7772,8 @@ export namespace Prisma {
     password: string
     refreshToken: string
     role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
     createdAt?: Date | string
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     sensors?: SensorUncheckedCreateNestedManyWithoutUserInput
@@ -7745,6 +7787,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     refreshToken?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUpdateManyWithoutUserNestedInput
     sensors?: SensorUpdateManyWithoutUserNestedInput
@@ -7759,6 +7803,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     refreshToken?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     sensors?: SensorUncheckedUpdateManyWithoutUserNestedInput
@@ -7773,6 +7819,8 @@ export namespace Prisma {
     password: string
     refreshToken: string
     role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
     createdAt?: Date | string
   }
 
@@ -7782,6 +7830,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     refreshToken?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -7792,6 +7842,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     refreshToken?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -8127,6 +8179,32 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -8162,6 +8240,11 @@ export namespace Prisma {
     none?: NotificationWhereInput
   }
 
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type PostOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -8185,6 +8268,8 @@ export namespace Prisma {
     password?: SortOrder
     refreshToken?: SortOrder
     role?: SortOrder
+    otp?: SortOrder
+    otpExpiresAt?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -8199,6 +8284,8 @@ export namespace Prisma {
     password?: SortOrder
     refreshToken?: SortOrder
     role?: SortOrder
+    otp?: SortOrder
+    otpExpiresAt?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -8209,6 +8296,8 @@ export namespace Prisma {
     password?: SortOrder
     refreshToken?: SortOrder
     role?: SortOrder
+    otp?: SortOrder
+    otpExpiresAt?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -8258,6 +8347,38 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -8327,26 +8448,6 @@ export namespace Prisma {
     not?: NestedEnumSensorStatusFilter<$PrismaModel> | $Enums.SensorStatus
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type SensorCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -8414,24 +8515,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumSensorStatusFilter<$PrismaModel>
     _max?: NestedEnumSensorStatusFilter<$PrismaModel>
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type EnumRepeatTypeFilter<$PrismaModel = never> = {
@@ -8634,6 +8717,14 @@ export namespace Prisma {
     set?: $Enums.Role
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -8786,10 +8877,6 @@ export namespace Prisma {
     set?: $Enums.SensorStatus
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type UserUpdateOneRequiredWithoutSensorsNestedInput = {
     create?: XOR<UserCreateWithoutSensorsInput, UserUncheckedCreateWithoutSensorsInput>
     connectOrCreate?: UserCreateOrConnectWithoutSensorsInput
@@ -8893,6 +8980,31 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -8958,6 +9070,48 @@ export namespace Prisma {
     _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -8986,20 +9140,6 @@ export namespace Prisma {
     not?: NestedEnumSensorStatusFilter<$PrismaModel> | $Enums.SensorStatus
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedEnumSensorTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.SensorType | EnumSensorTypeFieldRefInput<$PrismaModel>
     in?: $Enums.SensorType[] | ListEnumSensorTypeFieldRefInput<$PrismaModel>
@@ -9018,34 +9158,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumSensorStatusFilter<$PrismaModel>
     _max?: NestedEnumSensorStatusFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedEnumRepeatTypeFilter<$PrismaModel = never> = {
@@ -9323,6 +9435,8 @@ export namespace Prisma {
     password: string
     refreshToken: string
     role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
     createdAt?: Date | string
     sensors?: SensorCreateNestedManyWithoutUserInput
     schedules?: ScheduleCreateNestedManyWithoutUserInput
@@ -9336,6 +9450,8 @@ export namespace Prisma {
     password: string
     refreshToken: string
     role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
     createdAt?: Date | string
     sensors?: SensorUncheckedCreateNestedManyWithoutUserInput
     schedules?: ScheduleUncheckedCreateNestedManyWithoutUserInput
@@ -9364,6 +9480,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     refreshToken?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sensors?: SensorUpdateManyWithoutUserNestedInput
     schedules?: ScheduleUpdateManyWithoutUserNestedInput
@@ -9377,6 +9495,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     refreshToken?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sensors?: SensorUncheckedUpdateManyWithoutUserNestedInput
     schedules?: ScheduleUncheckedUpdateManyWithoutUserNestedInput
@@ -9389,6 +9509,8 @@ export namespace Prisma {
     password: string
     refreshToken: string
     role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
     createdAt?: Date | string
     posts?: PostCreateNestedManyWithoutUserInput
     schedules?: ScheduleCreateNestedManyWithoutUserInput
@@ -9402,6 +9524,8 @@ export namespace Prisma {
     password: string
     refreshToken: string
     role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
     createdAt?: Date | string
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     schedules?: ScheduleUncheckedCreateNestedManyWithoutUserInput
@@ -9430,6 +9554,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     refreshToken?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUpdateManyWithoutUserNestedInput
     schedules?: ScheduleUpdateManyWithoutUserNestedInput
@@ -9443,6 +9569,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     refreshToken?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     schedules?: ScheduleUncheckedUpdateManyWithoutUserNestedInput
@@ -9455,6 +9583,8 @@ export namespace Prisma {
     password: string
     refreshToken: string
     role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
     createdAt?: Date | string
     posts?: PostCreateNestedManyWithoutUserInput
     sensors?: SensorCreateNestedManyWithoutUserInput
@@ -9468,6 +9598,8 @@ export namespace Prisma {
     password: string
     refreshToken: string
     role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
     createdAt?: Date | string
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     sensors?: SensorUncheckedCreateNestedManyWithoutUserInput
@@ -9496,6 +9628,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     refreshToken?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUpdateManyWithoutUserNestedInput
     sensors?: SensorUpdateManyWithoutUserNestedInput
@@ -9509,6 +9643,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     refreshToken?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     sensors?: SensorUncheckedUpdateManyWithoutUserNestedInput
@@ -9521,6 +9657,8 @@ export namespace Prisma {
     password: string
     refreshToken: string
     role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
     createdAt?: Date | string
     posts?: PostCreateNestedManyWithoutUserInput
     sensors?: SensorCreateNestedManyWithoutUserInput
@@ -9534,6 +9672,8 @@ export namespace Prisma {
     password: string
     refreshToken: string
     role?: $Enums.Role
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
     createdAt?: Date | string
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     sensors?: SensorUncheckedCreateNestedManyWithoutUserInput
@@ -9562,6 +9702,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     refreshToken?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUpdateManyWithoutUserNestedInput
     sensors?: SensorUpdateManyWithoutUserNestedInput
@@ -9575,6 +9717,8 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     refreshToken?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     sensors?: SensorUncheckedUpdateManyWithoutUserNestedInput
