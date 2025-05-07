@@ -29,7 +29,7 @@ export class ScheduleService {
         },
         {
           repeat: { cron },
-          removeOnComplete: true,
+          removeOnComplete: false,
         },
       );
 
