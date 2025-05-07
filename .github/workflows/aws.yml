@@ -45,8 +45,5 @@ jobs:
               -e JWT_REFRESH_EXPIRE=${{ secrets.JWT_REFRESH_EXPIRE }} \
               -e REDIS_HOST=${{ secrets.REDIS_HOST }} \
               -e REDIS_PORT=${{ secrets.REDIS_PORT }} \
-              -e EMAIL_HOST=${{ secrets.EMAIL_HOST }} \
-              -e EMAIL_USER=${{ secrets.EMAIL_USER }} \
-              -e EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }} \
               ${{ secrets.DOCKERHUB_USERNAME }}/easy-farm:latest
 
