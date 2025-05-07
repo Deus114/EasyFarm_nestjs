@@ -25,11 +25,11 @@ export class MailService {
       from: '"EasyFarm Support" <support@gmail.com>',
       to,
       subject: 'Your EasyFarm OTP Code',
-      text: `Your OTP code is ${otp}. It will expire in 1 minutes.`,
+      text: `Your OTP code is ${otp}. It will expire in 5 minutes.`,
       html: `
         <h2>Your EasyFarm OTP Code</h2>
         <p style="font-size: 20px; color: green;"><b>${otp}</b></p>
-        <p>This code will expire in 1 minutes.</p>
+        <p>This code will expire in 5 minutes.</p>
       `,
     };
 

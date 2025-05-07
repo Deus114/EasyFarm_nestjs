@@ -128,12 +128,12 @@ export class AuthService {
 
         const otp = this.generateOtp();
 
-        // Lưu OTP và hạn dùng 1 phút
+        // Lưu OTP và hạn dùng 5 phút
         await this.prisma.user.update({
             where: { email },
             data: {
                 otp,
-                otpExpiresAt: new Date(Date.now() + 1 * 60 * 1000),
+                otpExpiresAt: new Date(Date.now() + 5 * 60 * 1000),
             },
         });
 
