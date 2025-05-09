@@ -44,8 +44,8 @@ async function bootstrap() {
 
   // Config swagger
   const config = new DocumentBuilder()
-    .setTitle('Bookstore APIs document')
-    .setDescription('Bookstore API description')
+    .setTitle('EasyFarm APIs document')
+    .setDescription('EasyFarm API description')
     .setVersion('1.0')
     .addBearerAuth(
       {
