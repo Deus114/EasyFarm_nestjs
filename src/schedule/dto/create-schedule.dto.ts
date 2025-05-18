@@ -16,21 +16,21 @@ export class CreateScheduleDto {
     @IsString()
     description: string;
 
-    @ApiProperty()
+    @ApiProperty({ example: "HH:mm" })
     @IsNotEmpty({ message: "StartTime không được để trống" })
     startTime: string; // "HH:mm"
 
-    @ApiProperty()
+    @ApiProperty({ example: "DAILY | WEEKLY | MONTHLY" })
     @IsNotEmpty({ message: "RepeatType không được để trống" })
     @IsEnum(RepeatType)
     repeatType: RepeatType;
 
-    @ApiProperty()
+    @ApiProperty({ example: "[0, ..., 6]" })
     @IsOptional()
     @IsArray()
     repeatDays?: number[];  // Chỉ cần nếu weekly
 
-    @ApiProperty()
+    @ApiProperty({ example: "[1, ..., 31]" })
     @IsOptional()
     @IsArray()
     repeatDates?: number[]; // Chỉ cần nếu monthly

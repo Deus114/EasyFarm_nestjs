@@ -121,4 +121,8 @@ export class ScheduleService {
 
     return this.prisma.schedule.delete({ where: { id } });
   }
+
+  async findAll(userId: number) {
+    return await this.prisma.schedule.findMany({ where: { userId } });
+  }
 }

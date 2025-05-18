@@ -16,11 +16,13 @@ export class UsersController {
     return await this.usersService.create(createUserDto);
   }
 
+  @ResponseMessage('Lấy dữ liệu tất cả người dùng thành công')
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
 
+  @ResponseMessage('Lấy dữ liệu người dùng thành công')
   @Public()
   @Get(':id')
   findOne(@Param('id')
