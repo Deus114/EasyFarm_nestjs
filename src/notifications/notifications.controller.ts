@@ -1,8 +1,8 @@
 // notifications.controller.ts
-import { Controller, Get, Param, Patch, Req, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Patch, Req, UseGuards } from '@nestjs/common';
 import { NotificationsService } from './notifications.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard'; // nếu có authentication
-import { User } from 'src/decorator/customize';
+import { ResponseMessage, User } from 'src/decorator/customize';
 import { IUser } from 'src/users/user.interface';
 
 @Controller('notifications')
@@ -10,6 +10,7 @@ import { IUser } from 'src/users/user.interface';
 export class NotificationsController {
   constructor(private readonly notificationsService: NotificationsService) { }
 
+  @ResponseMessage('Lấy tất cả thông báo của user thành công')
   @Get()
   async findAll(@User() user: IUser) {
     const userId = user.id;
@@ -17,7 +18,14 @@ export class NotificationsController {
   }
 
   @Patch(':id/read')
+  @ResponseMessage('Đã dấu thông báo đã đọc thành công')
   async markAsRead(@Param('id') id: string) {
     return this.notificationsService.markAsRead(Number(id));
+  }
+
+  @Delete(':id')
+  @ResponseMessage('Xóa thông báo thành công')
+  remove(@Param('id') id: string) {
+    return this.notificationsService.remove(+id);
   }
 }

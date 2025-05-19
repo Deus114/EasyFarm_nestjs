@@ -28,4 +28,8 @@ export class NotificationsService {
       data: { isRead: true },
     });
   }
+
+  async remove(id: number) {
+    return await this.prisma.notification.delete({ where: { id } });
+  }
 }
