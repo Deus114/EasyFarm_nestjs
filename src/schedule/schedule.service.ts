@@ -125,4 +125,8 @@ export class ScheduleService {
   async findAll(userId: number) {
     return await this.prisma.schedule.findMany({ where: { userId } });
   }
+
+  async findOne(id: number) {
+    return await this.prisma.schedule.findUnique({ where: { id } });
+  }
 }

@@ -15,8 +15,14 @@ export class ScheduleController {
 
   @ResponseMessage('Lấy tất cả lịch hẹn của người dùng thành công')
   @Get(':userId')
-  findOne(@Param('userId') userId: string) {
+  findAll(@Param('userId') userId: string) {
     return this.scheduleService.findAll(+userId);
+  }
+
+  @ResponseMessage('Lấy lịch hẹn của người dùng thành công')
+  @Get(':id/detail')
+  findOne(@Param('id') id: string) {
+    return this.scheduleService.findOne(+id);
   }
 
   @Patch(':id/pause')
